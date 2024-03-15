@@ -313,6 +313,12 @@
 			<description>
 			</description>
 		</method>
+		<method name="_body_get_step_scale" qualifiers="virtual const">
+			<return type="float" />
+			<param index="0" name="body" type="RID" />
+			<description>
+			</description>
+		</method>
 		<method name="_body_get_constant_force" qualifiers="virtual const">
 			<return type="Vector3" />
 			<param index="0" name="body" type="RID" />
@@ -473,6 +479,13 @@
 			<return type="void" />
 			<param index="0" name="body" type="RID" />
 			<param index="1" name="priority" type="float" />
+			<description>
+			</description>
+		</method>
+		<method name="_body_set_step_scale" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="body" type="RID" />
+			<param index="1" name="step_scale" type="float" />
 			<description>
 			</description>
 		</method>

@@ -377,6 +377,13 @@
 				Returns the body's collision priority.
 			</description>
 		</method>
+		<method name="body_set_step_scale" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="body" type="RID" />
+			<description>
+				Returns the body's physics step (delta) scale.
+			</description>
+		</method>
 		<method name="body_get_constant_force" qualifiers="const">
 			<return type="Vector3" />
 			<param index="0" name="body" type="RID" />
@@ -550,6 +557,14 @@
 			<param index="1" name="priority" type="float" />
 			<description>
 				Sets the body's collision priority.
+			</description>
+		</method>
+		<method name="body_set_step_scale">
+			<return type="void" />
+			<param index="0" name="body" type="RID" />
+			<param index="1" name="step_scale" type="float" />
+			<description>
+				Sets the body's step (delta) scale.
 			</description>
 		</method>
 		<method name="body_set_constant_force">
