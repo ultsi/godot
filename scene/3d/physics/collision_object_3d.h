@@ -48,6 +48,7 @@ private:
 	uint32_t collision_layer = 1;
 	uint32_t collision_mask = 1;
 	real_t collision_priority = 1.0;
+	real_t step_scale = 1.0;
 
 	bool area = false;
 
@@ -139,6 +140,9 @@ public:
 
 	void set_collision_priority(real_t p_priority);
 	real_t get_collision_priority() const;
+
+	void set_step_scale(real_t p_step_scale);
+	real_t get_step_scale() const;
 
 	void set_disable_mode(DisableMode p_mode);
 	DisableMode get_disable_mode() const;

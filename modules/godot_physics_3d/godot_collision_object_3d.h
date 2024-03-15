@@ -60,6 +60,7 @@ private:
 	uint32_t collision_layer = 1;
 	uint32_t collision_mask = 1;
 	real_t collision_priority = 1.0;
+	real_t step_scale = 1.0;
 
 	struct Shape {
 		Transform3D xform;
@@ -172,6 +173,13 @@ public:
 		_shape_changed();
 	}
 	_FORCE_INLINE_ real_t get_collision_priority() const { return collision_priority; }
+
+	_FORCE_INLINE_ void set_step_scale(real_t p_step_scale) {
+		ERR_FAIL_COND_MSG(p_step_scale <= 0, "Step scale must be greater than 0.");
+		step_scale = p_step_scale;
+		_shape_changed();
+	}
+	_FORCE_INLINE_ real_t get_step_scale() const { return step_scale; }
 
 	_FORCE_INLINE_ bool collides_with(GodotCollisionObject3D *p_other) const {
 		return p_other->collision_layer & collision_mask;

@@ -473,7 +473,7 @@ bool GodotBody3D::is_axis_locked(PhysicsServer3D::BodyAxis p_axis) const {
 	return locked_axis & p_axis;
 }
 
-void GodotBody3D::integrate_forces(real_t p_step) {
+void GodotBody3D::integrate_forces(real_t server_p_step) {
 	if (mode == PhysicsServer3D::BODY_MODE_STATIC) {
 		return;
 	}
@@ -487,6 +487,8 @@ void GodotBody3D::integrate_forces(real_t p_step) {
 	bool angular_damp_done = false;
 
 	bool stopped = false;
+
+	real_t p_step = server_p_step * get_step_scale();
 
 	gravity = Vector3(0, 0, 0);
 
@@ -670,7 +672,8 @@ void GodotBody3D::integrate_forces(real_t p_step) {
 	contact_count = 0;
 }
 
-void GodotBody3D::integrate_velocities(real_t p_step) {
+void GodotBody3D::integrate_velocities(real_t server_p_step) {
+	real_t p_step = server_p_step * get_step_scale();
 	if (mode == PhysicsServer3D::BODY_MODE_STATIC) {
 		return;
 	}

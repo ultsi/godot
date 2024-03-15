@@ -247,6 +247,9 @@ void PhysicsServer3DExtension::_bind_methods() {
 	GDVIRTUAL_BIND(_body_set_collision_priority, "body", "priority");
 	GDVIRTUAL_BIND(_body_get_collision_priority, "body");
 
+	GDVIRTUAL_BIND(_body_set_step_scale, "body", "step_scale");
+	GDVIRTUAL_BIND(_body_get_step_scale, "body");
+
 	GDVIRTUAL_BIND(_body_set_user_flags, "body", "flags");
 	GDVIRTUAL_BIND(_body_get_user_flags, "body");
 
