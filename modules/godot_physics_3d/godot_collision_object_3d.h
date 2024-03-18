@@ -175,7 +175,6 @@ public:
 	_FORCE_INLINE_ real_t get_collision_priority() const { return collision_priority; }
 
 	_FORCE_INLINE_ void set_step_scale(real_t p_step_scale) {
-		ERR_FAIL_COND_MSG(p_step_scale <= 0, "Step scale must be greater than 0.");
 		step_scale = p_step_scale;
 		_shape_changed();
 	}
