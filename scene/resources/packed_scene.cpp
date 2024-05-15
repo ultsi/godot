@@ -527,7 +527,9 @@ Node *SceneState::instantiate(GenEditState p_edit_state) const {
 
 			bool valid;
 			Array array = dnp.base->get(dnp.property, &valid);
-			ERR_CONTINUE_EDMSG(!valid, vformat("Failed to get property '%s' from node '%s'.", dnp.property, dnp.base->get_name()));
+			if (!valid) {
+				ERR_CONTINUE_MSG(!valid, vformat("PackedScene %s has invalid array property %s", path, dnp.property));
+			}
 			array = array.duplicate();
 
 			array.resize(paths.size());
