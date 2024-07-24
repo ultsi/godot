@@ -547,6 +547,10 @@ float light_process_omni_shadow(uint idx, vec3 vertex, vec3 normal, float taa_fr
 	return 1.0;
 }
 
+float get_light_length(vec3 rel_vec) {
+	return floor(max(length(rel_vec), 1.0));
+}
+
 void light_process_omni(uint idx, vec3 vertex, vec3 eye_vec, vec3 normal, vec3 vertex_ddx, vec3 vertex_ddy, vec3 f0, uint orms, float shadow, vec3 albedo, inout float alpha,
 #ifdef LIGHT_BACKLIGHT_USED
 		vec3 backlight,
@@ -567,7 +571,7 @@ void light_process_omni(uint idx, vec3 vertex, vec3 eye_vec, vec3 normal, vec3 v
 #endif
 		inout vec3 diffuse_light, inout vec3 specular_light) {
 	vec3 light_rel_vec = omni_lights.data[idx].position - vertex;
-	float light_length = length(light_rel_vec);
+	float light_length = get_light_length(light_rel_vec);
 	float omni_attenuation = get_omni_attenuation(light_length, omni_lights.data[idx].inv_radius, omni_lights.data[idx].attenuation);
 	float light_attenuation = omni_attenuation;
 	vec3 color = omni_lights.data[idx].color;
@@ -702,7 +706,7 @@ float light_process_spot_shadow(uint idx, vec3 vertex, vec3 normal, float taa_fr
 #ifndef SHADOWS_DISABLED
 	if (spot_lights.data[idx].shadow_opacity > 0.001) {
 		vec3 light_rel_vec = spot_lights.data[idx].position - vertex;
-		float light_length = length(light_rel_vec);
+		float light_length = floor(length(light_rel_vec));
 		vec3 spot_dir = spot_lights.data[idx].direction;
 
 		vec3 shadow_dir = light_rel_vec / light_length;
@@ -814,7 +818,7 @@ void light_process_spot(uint idx, vec3 vertex, vec3 eye_vec, vec3 normal, vec3 v
 		inout vec3 diffuse_light,
 		inout vec3 specular_light) {
 	vec3 light_rel_vec = spot_lights.data[idx].position - vertex;
-	float light_length = length(light_rel_vec);
+	float light_length = get_light_length(light_rel_vec);
 	float spot_attenuation = get_omni_attenuation(light_length, spot_lights.data[idx].inv_radius, spot_lights.data[idx].attenuation);
 	vec3 spot_dir = spot_lights.data[idx].direction;
 
