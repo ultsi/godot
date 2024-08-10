@@ -1878,6 +1878,7 @@ void TileMapLayer::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "navigation_visibility_mode", PROPERTY_HINT_ENUM, "Default,Force Show,Force Hide"), "set_navigation_visibility_mode", "get_navigation_visibility_mode");
 
 	ADD_SIGNAL(MethodInfo(CoreStringName(changed)));
+	ADD_SIGNAL(MethodInfo("cells_changed"));
 
 	ADD_PROPERTY_DEFAULT("tile_map_data_format", TileMapDataFormat::TILE_MAP_DATA_FORMAT_1);
 
@@ -2380,6 +2381,12 @@ void TileMapLayer::set_cell(const Vector2i &p_coords, int p_source_id, const Vec
 	_queue_internal_update();
 
 	used_rect_cache_dirty = true;
+
+	uint64_t ct = OS::get_singleton()->get_ticks_msec();
+	if (ct - _last_cells_changed_emit_time > 500) {
+		_last_cells_changed_emit_time = ct;
+		emit_signal("cells_changed");
+	}
 }
 
 void TileMapLayer::erase_cell(const Vector2i &p_coords) {
