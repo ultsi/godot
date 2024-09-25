@@ -247,6 +247,9 @@ public:
 	virtual void body_set_collision_priority(RID p_body, real_t p_priority) override {}
 	virtual real_t body_get_collision_priority(RID p_body) const override { return 0; }
 
+	virtual void body_set_step_scale(RID p_body, real_t p_step_scale) override {};
+	virtual real_t body_get_step_scale(RID p_body) const override { return 1.0; };
+
 	virtual void body_set_user_flags(RID p_body, uint32_t p_flags) override {}
 	virtual uint32_t body_get_user_flags(RID p_body) const override { return 0; }
 

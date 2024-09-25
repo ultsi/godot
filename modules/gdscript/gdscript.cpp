@@ -744,7 +744,7 @@ Error GDScript::reload(bool p_keep_state) {
 		has_instances = instances.size();
 	}
 
-	ERR_FAIL_COND_V(!p_keep_state && has_instances, ERR_ALREADY_IN_USE);
+	ERR_FAIL_COND_V_MSG(!p_keep_state && has_instances, ERR_ALREADY_IN_USE, "ERROR: For script '" + path + "' Condition '!p_keep_state && has_instances' is true. Returning: ERR_ALREADY_IN_USE. Instances count: " + instances.size());
 
 	String basedir = path;
 
